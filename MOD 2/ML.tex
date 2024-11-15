@@ -1,0 +1,528 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{lmodern}        % https://github.com/rstudio/rticles/issues/343
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+
+\title{Competencia sistemica de Mercado Libre}
+
+\author{
+    Futuros ingenieros
+    \thanks{Técnicas y Herramientas Modernas II-Competencia sistemica}
+   \\
+    Universidad Nacional de Cuyo \\
+  Ingenieros J. 1400 \\
+  \texttt{ingenieria.uncuyo.edu.ar} \\
+  }
+
+
+% tightlist command for lists without linebreak
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+% Pandoc citation processing
+%From Pandoc 3.1.8
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+Este paper busca explicar como Mercado Libre utiliza inversiones en
+tecnologias tales como Big Data y Analitics para obetner ventajas
+competitivas.
+\end{abstract}
+
+
+\pagebreak
+
+\section{Introducción}\label{introducciuxf3n}
+
+\subsection{Mercado Libre}\label{mercado-libre}
+
+Mercado Libre, fundada en 1999 por el empresario argentino Marcos
+Galperin, es la plataforma líder de comercio electrónico en América
+Latina y una de las empresas tecnológicas más influyentes en la región.
+Su misión es democratizar el comercio y los servicios financieros en
+mercados con gran potencial de crecimiento como Brasil, México y
+Argentina, aprovechando la tecnología para mejorar el acceso de
+individuos y negocios a soluciones digitales.
+
+\begin{figure}[b]
+\centering
+\includegraphics{ML.jpg}
+\caption{Mercado Libre}
+\end{figure}
+
+({``Mercado {Libre} {Global} {Selling} {\textbar} {Sell} in {Latin}
+{America}''} n.d.)
+
+La empresa ofrece un ecosistema integral que va más allá del comercio
+electrónico, incluyendo Mercado Pago, su plataforma de pagos y finanzas
+que facilita transacciones en línea y fuera de línea. A través de
+Mercadoenvíos, Mercado Libre también gestiona una de las redes de
+logística más avanzadas de la región, cubriendo operaciones que incluyen
+centros de cumplimiento, transporte aéreo y puntos de entrega. Estas
+innovaciones logísticas permiten tiempos de entrega rápidos y una
+experiencia de usuario eficiente, mejorando la accesibilidad de millones
+de productos para consumidores y vendedores.
+
+({``Mercado {Libre} {Global} {Selling} {\textbar} {Sell} in {Latin}
+{America}''} n.d.)
+
+En términos de sostenibilidad, Mercado Libre se enfoca en reducir su
+impacto ambiental y fomentar prácticas responsables en toda su cadena de
+valor. Esto incluye la inversión en energías renovables para sus centros
+de distribución y el desarrollo de un programa para neutralizar
+emisiones de carbono generadas por el envío de productos. Además, sus
+iniciativas de inclusión financiera promueven la integración de pequeñas
+y medianas empresas en el mercado digital, lo cual impulsa el desarrollo
+económico de la región y apoya a emprendedores que previamente no tenían
+acceso a crédito ni a servicios financieros tradicionales ({``Mercado
+{Libre} {Global} {Selling} {\textbar} {Sell} in {Latin} {America}''}
+n.d.).
+
+Mercado Libre es, sin duda, un referente en la digitalización del
+comercio y los servicios financieros en América Latina, logrando un
+impacto profundo en la economía y facilitando el acceso a un mercado
+competitivo y global para millones de personas.
+
+\section{Pregunta de Investigación}\label{pregunta-de-investigaciuxf3n}
+
+¿Cómo mejora la inversión de Mercado Libre en tecnología su ventaja
+competitiva frente a otros actores de e-commerce en América Latina, y
+qué papel juega la inteligencia de datos (big data y analytics) en su
+estrategia para fidelizar a los usuarios?
+
+\subsection{Análisis y Dimensionamiento de la
+Pregunta}\label{anuxe1lisis-y-dimensionamiento-de-la-pregunta}
+
+La pregunta de investigación busca entender cómo la tecnología avanzada
+fortalece la posición de Mercado Libre en un mercado altamente
+competitivo, así como el rol que tiene el análisis de datos en el
+desarrollo de una base de usuarios leales. Este análisis se enfoca en el
+nivel micro del modelo de competencia sistémica, que incluye la
+capacidad de una empresa para integrar sus recursos tecnológicos y
+humanos para generar una ventaja sostenida y diferenciadora.
+
+\section{Marco teórico}\label{marco-teuxf3rico}
+
+\subsection{Tecnologías Efectivas en el Comercio
+Electrónico}\label{tecnologuxedas-efectivas-en-el-comercio-electruxf3nico}
+
+Big Data Analytics ha emergido como una de las tecnologías más
+influyentes para mejorar la eficiencia operativa y la satisfacción del
+cliente en el comercio electrónico. Esta tecnología permite a las
+empresas procesar y analizar grandes volúmenes de datos estructurados y
+no estructurados en tiempo real, posibilitando una segmentación de
+clientes más precisa, marketing personalizado y mantenimiento predictivo
+(Ijomah, Louis, and Anjorin 2024).Esta capacidad incrementa la
+fidelización de los clientes y optimiza las operaciones empresariales.
+
+\subsubsection{Eficiencia Operativa}\label{eficiencia-operativa}
+
+Big Data Analytics mejora la eficiencia operativa en varias formas:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Gestión de Inventarios}: La analítica predictiva permite a las
+  empresas prever la demanda del cliente, optimizar los niveles de
+  inventario y mejorar las operaciones de la cadena de suministro
+  (Gonzalez and Rabbi 2023). Esto resulta en ahorros de costos y una
+  mayor satisfacción del cliente al asegurar la disponibilidad de
+  productos.
+\item
+  \textbf{Estrategias de Precios:} Big Data Analytics permite optimizar
+  estrategias de precios basadas en tendencias del mercado y el
+  comportamiento del cliente(Gonzalez and Rabbi 2023).
+\item
+  \textbf{Optimización de la Cadena de Suministro:} Las técnicas
+  avanzadas de análisis ayudan a las empresas de comercio electrónico a
+  optimizar sus cadenas de suministro, llevando a operaciones más
+  eficientes(Gonzalez and Rabbi 2023).
+\end{enumerate}
+
+\subsubsection{Satisfacción del
+Cliente}\label{satisfacciuxf3n-del-cliente}
+
+Varias tecnologías han demostrado ser efectivas para mejorar la
+satisfacción del cliente:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Motores de Personalización:} Big Data Analytics alimenta
+  motores de personalización que crean experiencias de compra a medida.
+  Estos sistemas analizan datos del cliente, historial de compras y
+  comportamiento de navegación para ofrecer recomendaciones de productos
+  y contenido personalizado(Gonzalez and Rabbi 2023)\&(Ijomah, Louis,
+  and Anjorin 2024). Esta personalización mejora la experiencia general
+  de compra y aumenta la satisfacción del cliente (Gonzalez and Rabbi
+  2023).
+\item
+  \textbf{Analítica en Tiempo Real:} La capacidad de analizar datos en
+  tiempo real permite a las empresas responder rápidamente a consultas,
+  comentarios y quejas de los clientes, mejorando la experiencia general
+  del cliente (Ijomah, Louis, and Anjorin 2024).
+\item
+  \textbf{Chatbots y Asistentes Virtuales:} Alimentados por análisis de
+  datos en tiempo real, estos asistentes brindan soporte instantáneo a
+  los clientes, abordando sus preguntas y preocupaciones de manera
+  inmediata (Ijomah, Louis, and Anjorin 2024).
+\item
+  \textbf{Análisis de Sentimientos:} Las técnicas de procesamiento de
+  lenguaje natural (NLP) permiten analizar opiniones y comentarios de
+  clientes, clasificándolos como positivos, negativos o neutrales. Esto
+  ayuda a identificar áreas de mejora y atender las preocupaciones del
+  cliente de manera oportuna(Ijomah, Louis, and Anjorin 2024).
+\end{enumerate}
+
+\subsubsection{Construcción de una Ventaja Competitiva
+Sostenible}\label{construcciuxf3n-de-una-ventaja-competitiva-sostenible}
+
+La implementación de estas tecnologías contribuye a construir una
+ventaja competitiva sostenible de varias maneras:
+
+\textbf{Lealtad del Cliente Mejorada:} Las experiencias personalizadas y
+el mejor servicio al cliente conducen a una mayor satisfacción y lealtad
+del cliente (Gonzalez and Rabbi 2023), creando una barrera fuerte frente
+a la competencia.
+
+\textbf{Toma de Decisiones Basada en Datos:} Big Data Analytics permite
+tomar decisiones informadas en base a información en tiempo real,
+permitiendo a las empresas adaptarse rápidamente a los cambios del
+mercado y mantenerse por delante de sus competidores(Gonzalez and Rabbi
+2023).
+
+\textbf{Mejora Continua:} La capacidad de analizar continuamente datos y
+opiniones de los clientes permite refinar productos, servicios y
+estrategias de forma continua, asegurando una competitividad sostenida
+(Gonzalez and Rabbi 2023).
+
+\textbf{Asignación Eficiente de Recursos:} Mediante la analítica
+predictiva, las empresas pueden asignar recursos de manera más
+eficiente, enfocándose en áreas que proporcionan los mayores retornos
+(Gonzalez and Rabbi 2023).
+
+En conclusión, Big Data Analytics, junto con sus aplicaciones en
+personalización, análisis en tiempo real y automatización del servicio
+al cliente, ha demostrado ser la tecnología más efectiva para mejorar la
+eficiencia operativa y la satisfacción del cliente en el comercio
+electrónico. Al habilitar la toma de decisiones basada en datos,
+experiencias personalizadas y mejora continua, estas tecnologías ayudan
+a construir una ventaja competitiva sostenible en el panorama cada vez
+más competitivo del comercio electrónico (Gonzalez and Rabbi 2023).
+
+\subsection{Análisis de Big Data en la Personalización del Comercio
+Electrónico}\label{anuxe1lisis-de-big-data-en-la-personalizaciuxf3n-del-comercio-electruxf3nico}
+
+La analítica de big data se ha convertido en una herramienta crucial
+para las empresas de comercio electrónico que buscan mejorar la
+experiencia del cliente y aumentar la lealtad y la retención. Al
+aprovechar grandes cantidades de datos de clientes, las empresas pueden
+crear experiencias de compra altamente personalizadas que se ajusten a
+las preferencias y comportamientos individuales.
+
+\subsubsection{Estrategias de
+Personalización}\label{estrategias-de-personalizaciuxf3n}
+
+\textbf{Recomendaciones de Productos:} Las empresas de comercio
+electrónico utilizan big data para analizar historiales de compra,
+patrones de navegación y preferencias del cliente para ofrecer
+recomendaciones de productos personalizadas (Gonzalez and Rabbi
+2023).Por ejemplo, el motor de recomendaciones de Amazon analiza el
+historial de compras de los clientes, el comportamiento de navegación y
+las calificaciones para sugerir productos adaptados a las preferencias
+individuales.(Ijomah, Louis, and Anjorin 2024) 
+
+\textbf{Personalización de Contenido:} Big data permite a las empresas personalizar el
+contenido, incluidos los mensajes de marketing y el diseño de sitios
+web, basándose en las preferencias y comportamientos de cada usuario
+(Gonzalez and Rabbi 2023). Este enfoque crea una experiencia de compra
+en línea más atractiva y relevante (Gonzalez and Rabbi 2023).
+
+\textbf{Personalización en Tiempo Real:} La analítica avanzada permite a
+las empresas procesar y analizar datos en tiempo real, permitiendo
+ajustes inmediatos en campañas de marketing y recomendaciones de
+productos basados en el comportamiento actual del cliente (Ijomah,
+Louis, and Anjorin 2024). 
+
+\textbf{Campañas de Marketing Personalizadas:}
+Al analizar el comportamiento y el historial de compras de los clientes,
+las empresas pueden crear campañas de marketing altamente dirigidas,
+aumentando la probabilidad de conversiones(Gonzalez and Rabbi 2023).
+
+\subsubsection{Impacto en la Lealtad y Retención del
+Usuario}\label{impacto-en-la-lealtad-y-retenciuxf3n-del-usuario}
+
+La implementación de big data para la personalización ha mostrado
+efectos positivos significativos en la lealtad y retención del cliente:
+
+\textbf{Aumento de la Satisfacción del Cliente}: Las experiencias
+personalizadas impulsadas por big data han llevado a mayores niveles de
+satisfacción del cliente(Gonzalez and Rabbi 2023).
+
+\textbf{Mejora en la Retención del Cliente}: Las empresas de comercio
+electrónico atribuyen un aumento en las tasas de retención de clientes a
+la implementación de big data (Gonzalez and Rabbi 2023).
+
+\textbf{Mayor Compromiso del Cliente}: Las experiencias personalizadas
+creadas mediante big data han demostrado aumentar el compromiso del
+cliente y la probabilidad de compras repetidas (Gonzalez and Rabbi
+2023).
+
+\textbf{Prevención Predictiva de la Deserción}: Big data permite
+identificar clientes en riesgo de abandonar la plataforma e implementar
+estrategias de retención proactivas(Ijomah, Louis, and Anjorin 2024).
+
+\textbf{Optimización de Programas de Lealtad}: Big data ayuda a diseñar
+y optimizar programas de lealtad, identificando cuáles incentivos son
+más efectivos para diferentes segmentos de clientes (Ijomah, Louis, and
+Anjorin 2024).
+
+\subsubsection{Impacto Medible}\label{impacto-medible}
+
+Los análisis estadísticos han demostrado el impacto significativo de big
+data en la personalización y retención de clientes:
+
+\textbf{Correlación con la Personalización}: Se encontró una correlación
+positiva estadísticamente significativa entre el uso de big data y la
+personalización percibida en el comercio electrónico (Gonzalez and Rabbi
+2023).
+
+\textbf{Impacto en las Tasas de Retención}: Un análisis de regresión
+indicó una relación positiva significativa entre el nivel de integración
+de big data y las tasas de retención de clientes (Gonzalez and Rabbi
+2023).
+
+\textbf{Asociación con la Lealtad del Cliente}: Una prueba de
+chi-cuadrado reveló una asociación significativa entre la implementación
+de big data y los comportamientos de lealtad del cliente (Gonzalez and
+Rabbi 2023).
+
+En conclusión, el análisis de big data ha revolucionado la forma en que
+las empresas de comercio electrónico abordan la personalización,
+llevando a mejoras significativas en la lealtad y retención de usuarios.
+Al permitir experiencias personalizadas, estrategias de retención
+proactivas y toma de decisiones basada en datos, la analítica de big
+data se ha convertido en una herramienta esencial para las empresas de
+comercio electrónico que buscan prosperar en mercados competitivos
+(Gonzalez and Rabbi 2023).
+
+\subsection{Factores externos clave para el éxito del e-commerce en
+mercados
+emergentes}\label{factores-externos-clave-para-el-uxe9xito-del-e-commerce-en-mercados-emergentes}
+
+\subsubsection{Alianzas estratégicas}\label{alianzas-estratuxe9gicas}
+
+Las alianzas estratégicas han demostrado ser un factor importante para
+el éxito de las empresas de e-commerce en mercados emergentes. Las
+asociaciones con intermediarios en línea locales pueden ayudar a las
+empresas a navegar las complejidades culturales y otras barreras
+sociales (Agarwal and Wu 2015). Por ejemplo, Expedia adquirió el 30\% de
+las acciones de eLong, una importante empresa de viajes en línea china,
+para mantener su presencia en el mercado de e-commerce chino (Agarwal
+and Wu 2015). De manera similar, Amazon se asoció con Kindle e-reader
+para establecer una librería digital en Brasil(Agarwal and Wu 2015).
+
+\subsubsection{Políticas de
+regulación}\label{poluxedticas-de-regulaciuxf3n}
+
+Las políticas y regulaciones gubernamentales juegan un papel crucial en
+el desarrollo del e-commerce en mercados emergentes:
+
+\textbf{Acuerdos multilaterales:} La Organización Mundial del Comercio
+(OMC) proporciona un marco para reducir las imperfecciones del mercado y
+las asimetrías de información en el e-commerce en economías emergentes
+(Agarwal and Wu 2015). Los acuerdos comerciales regionales (RTA) también
+incluyen disposiciones sobre e-commerce, particularmente en las áreas de
+servicios e inversión (Agarwal and Wu 2015).
+
+\textbf{Protección de la propiedad intelectual:} El Acuerdo sobre los
+Aspectos de los Derechos de Propiedad Intelectual relacionados con el
+Comercio (ADPIC) de la OMC proporciona un marco que obliga a los países
+miembros a proteger los derechos de propiedad intelectual (Agarwal and
+Wu 2015). Esto es particularmente importante para las transacciones de
+e-commerce que involucran productos relacionados con la tecnología
+(Agarwal and Wu 2015).
+
+\textbf{Políticas de puertas abiertas:} Los gobiernos de las economías
+emergentes han adoptado políticas de puertas abiertas para las empresas
+extranjeras y han fomentado la privatización y la descentralización
+(Agarwal and Wu 2015).
+
+\subsubsection{Infraestructura}\label{infraestructura}
+
+La infraestructura física y financiera es crucial para el éxito del
+e-commerce en mercados emergentes:
+
+\textbf{Infraestructura física:} Una infraestructura de Internet bien
+desarrollada ofrece una ventaja de localización para las empresas de
+e-commerce (Agarwal and Wu 2015).
+
+\textbf{Infraestructura financiera y de mercado:} Las economías
+emergentes necesitan crear una red electrónica de servicios bancarios y
+de inversión, seguros, corretaje, empresas de calificación crediticia y
+otros servicios (Agarwal and Wu 2015). Algunas economías emergentes han
+intentado resolver el problema de la infraestructura financiera
+permitiendo el pago contra entrega para artículos más grandes y tanto el
+pago como la recogida en la oficina de correos local (Agarwal and Wu
+2015).
+
+\subsubsection{Adaptación cultural}\label{adaptaciuxf3n-cultural}
+
+La adaptación a las normas y valores culturales locales es esencial:
+
+\textbf{Confianza del consumidor:} En Rusia, Ozon pudo superar el
+problema de la confianza proporcionando retroalimentación continua
+durante todo el proceso de pedido (Agarwal and Wu 2015).
+
+\textbf{Métodos de pago:} En India, Flipkart ofrece productos que se
+pueden pagar en efectivo contra entrega para superar las percepciones de
+los consumidores sobre la confianza y la seguridad en los pagos en línea
+(Agarwal and Wu 2015).
+
+En conclusión, el éxito de las empresas de e-commerce en mercados
+emergentes depende en gran medida de factores externos como las alianzas
+estratégicas, las políticas de regulación favorables, la infraestructura
+adecuada y la adaptación a las normas culturales locales. Estos factores
+pueden ayudar a las empresas a superar los desafíos únicos que presentan
+los mercados emergentes y aprovechar las oportunidades de crecimiento
+(Agarwal and Wu 2015).
+
+\section{Conclusión}\label{conclusiuxf3n}
+
+La inversión de Mercado Libre en tecnología ha sido un factor clave para
+consolidar su liderazgo en el mercado de comercio electrónico en América
+Latina. La compañía no solo ha apostado por la infraestructura
+tecnológica adecuada, sino que ha integrado estrategias innovadoras en
+el uso de Big Data y analítica avanzada para optimizar sus operaciones y
+mejorar la experiencia del usuario, lo que le otorga una ventaja
+competitiva sostenible frente a otros actores en la región.
+
+En términos de eficiencia operativa, Mercado Libre ha implementado
+tecnologías de Big Data que le permiten gestionar de manera más efectiva
+su inventario, precios y cadena de suministro, optimizando recursos y
+mejorando la disponibilidad de productos. La utilización de análisis
+predictivos permite anticipar la demanda, minimizando costos y mejorando
+la satisfacción del cliente. Este tipo de capacidades permite a Mercado
+Libre mantener una ventaja sobre competidores, como Amazon o tiendas
+locales, que pueden no contar con el mismo nivel de infraestructura
+tecnológica adaptada a las complejidades del mercado latinoamericano.
+
+La personalización de la experiencia del usuario es otro punto esencial
+en la estrategia de Mercado Libre. La compañía utiliza Big Data para
+entender el comportamiento de los consumidores, ofrecer recomendaciones
+de productos personalizadas y diseñar campañas de marketing altamente
+dirigidas. Esto no solo mejora la satisfacción del cliente, sino que
+también contribuye a fidelizar a los usuarios, al crear experiencias que
+se adaptan a sus preferencias y necesidades específicas. En el mercado
+de comercio electrónico, donde la lealtad del cliente puede ser volátil,
+este enfoque tecnológico es un diferenciador clave.
+
+Además, el uso de inteligencia de datos juega un papel crucial en la
+prevención de la deserción de clientes y en la mejora de programas de
+lealtad. Con el análisis de grandes volúmenes de datos, Mercado Libre
+puede identificar patrones de comportamiento y ofrecer incentivos
+específicos para retener a los usuarios, lo cual se refleja en una mayor
+retención y compromiso.
+
+Sin embargo, el contexto de los mercados emergentes, como el
+latinoamericano, presenta desafíos adicionales. Factores como la
+infraestructura digital, las regulaciones gubernamentales y la
+adaptación cultural son esenciales para el éxito de Mercado Libre. La
+empresa ha logrado adaptarse a las características únicas de cada país
+de la región, ofreciendo opciones de pago flexibles, como el pago contra
+entrega, y asegurando que su plataforma sea accesible y confiable en
+diversos entornos económicos.
+
+En resumen, la combinación de una inversión sólida en tecnología, la
+integración de Big Data para la personalización de la experiencia y la
+optimización operativa, junto con una adaptación efectiva a los factores
+culturales y regulatorios de América Latina, ha permitido a Mercado
+Libre no solo mantener una ventaja competitiva significativa, sino
+también fortalecer su fidelización de clientes frente a otros actores
+del e-commerce en la región. Esta estrategia tecnológica no solo le
+otorga una posición de liderazgo, sino que también le permite adaptarse
+de manera ágil y sostenible en un mercado altamente dinámico y
+competitivo.
+
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-agarwal_factors_2015}
+Agarwal, James, and Terry Wu. 2015. {``Factors {Influencing} {Growth}
+{Potential} of {E}-{Commerce} in {Emerging} {Economies}: {An}
+{Institution}-{Based} {N}-{OLI} {Framework} and {Research}
+{Propositions}.''} \emph{Thunderbird International Business Review} 57
+(3): 197--215. \url{https://doi.org/10.1002/tie.21694}.
+
+\bibitem[\citeproctext]{ref-gonzalez_evaluating_2023}
+Gonzalez, Maria, and Fazle Rabbi. 2023. {``Evaluating the {Impact} of
+{Big} {Data} {Analytics} on {Personalized} {E}-Commerce {Shopping}
+{Experiences} and {Customer} {Retention} {Strategies}.''} \emph{Journal
+of Computational Social Dynamics} 8 (2): 13--25.
+\url{https://vectoral.org/index.php/JCSD/article/view/31}.
+
+\bibitem[\citeproctext]{ref-ijomah_role_2024}
+Ijomah, Tochukwu, Nsisong Louis, and Kikelomo Anjorin. 2024. {``The Role
+of Big Data Analytics in Customer Relationship Management: {Strategies}
+for Improving Customer Engagement and Retention,''} September.
+
+\bibitem[\citeproctext]{ref-noauthor_mercado_nodate}
+{``Mercado {Libre} {Global} {Selling} {\textbar} {Sell} in {Latin}
+{America}.''} n.d. Accessed November 8, 2024.
+\url{https://global-selling.mercadolibre.com/landing/about}.
+
+\end{CSLReferences}
+
+\bibliographystyle{unsrt}
+\bibliography{REF.bib}
+
+
+\end{document}

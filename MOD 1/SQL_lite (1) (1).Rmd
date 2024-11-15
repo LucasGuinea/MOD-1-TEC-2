@@ -1,0 +1,228 @@
+---
+title: "Test"
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+date: "2024-03-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## SQLite en R
+
+Se requiere instalar la biblioteca RSQL
+
+
+Si nosotros dentro del comando gris ponemos echo=false lo que pasa es q cuando tejamos lo q esta dentro del comando no aparecera.
+Si quieren averiguar mas de los parametros para pasarlo al tramo ejecutable del r (comandos) 
+```{r,echo=FALSE}
+library(tidyverse)
+library(odbc)
+library(DBI)
+library(RSQLite)
+```
+
+CUIDADO Si cuando ejecutas el comando de library, antes tenemos que ir a tools, luego install, packaging y descargar la biblioteca/libreria que aparece a la derecha de library en azul.
+
+Para ejecutar lo q esta en la zona gris, q son los comandos de programacion, me paro al final de la liena que quiero llamar y ctrl + enter me lo ejecuta
+
+## Abrir una base de datos de una tabla sóla
+
+Ejemplo de la base de datos de las ligas
+
+
+```{r}
+library("RSQLite")
+
+## abrir una coneccion 
+con <- dbConnect(drv=RSQLite::SQLite(),dbname="football-data.db")
+tables <- dbListTables(con)
+tables
+
+
+```
+
+Ejecutaremos un QUERY
+
+
+```{sql connection=con}
+
+
+SELECT 
+ HomeTeam, AwayTeam, FTAG, FTAG 
+FROM 
+  spain_la_liga
+WHERE
+  AwayTeam IN ('Sevilla', 'Real Madrid') 
+```
+
+
+Vamos a explicar desde cero como crear un quer. Al igual que como haciamos con R hay que tocar la C verde q esta arriba pero en lugar de decirle q vamos a poner comandos de R vamos a decirle que queremos comandos de SQL, para que se ejecute se tiene que haber ejecutado lo que hicimos en las lineas anteriores
+
+
+
+
+
+```{sql connection=con}
+select * from spain_la_liga
+```
+
+## Tarea 1
+
+Crear una tabla de alumnos en la misma base
+
+
+
+```{sql connection=con}
+CREATE TABLE alumnos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    calificacion INTEGER,
+    promedio REAL,
+    telefono INTEGER,
+    email TEXT DEFAULT "@gmail.com"
+    
+);
+```
+
+
+```{sql connection=con}
+INSERT INTO alumnos (id, nombre, calificacion, promedio, telefono, email)
+VALUES
+(1, "Milagros Bravo", 9 , 7.8 , 2614183531, "milibravo2911"), 
+(2, "Abril Wursten", 9 , 9.8 , 2622666961, "abrilwursten99"), 
+(3, "Constanza Di Rocco", 8 , 9.3 , 2616390959, "cdiroccoarmitano"),
+(4, "Lucia Gallart", 8 , 7.3 , 2615414285, "luciagallart"),
+(5, "Lucia Lopez", 7 , 8.3 , 2613428978, "lucilopez"),
+(6, "Juan Ferrero", 9 , 8.3 , 2616360833, "juanmarcosferreromartinez")
+;
+```
+
+
+```{sql connection=con}
+select * from alumnos;
+
+
+```
+
+```{sql connection=con}
+DROP TABLE alumnos;
+
+```
+
+
+
+## Ejemplo y apertura de la conexión
+
+
+Este tutorial utiliza la base de datos SQL de muestra creada en este tutorial y almacenada en un objeto llamado **conexion**. Siga estas instrucciones para obtener más información o ejecute este código:
+
+
+```{r}
+# Dataset internos de R, podríamos verlos con el comando data()
+data("AirPassengers") # Pasajeros
+data("Titanic") # Sobrevivientes del titanic
+ 
+#Cramos la conexión
+
+conexion <- dbConnect(drv = RSQLite::SQLite(),
+                 dbname = ":memory:")
+ 
+#store sample data in database
+dbWriteTable(conn = conexion, 
+             name = "population",
+             value = population)
+dbWriteTable(conn = conexion, 
+             name = "who",
+             value = who)
+ 
+#
+# Es recomedable remover las tablas que usamos del R 
+#y quedarnos solamente con la de SQL para no confundir 
+#rm(who, population)
+```
+
+```{r}
+tbl(src = conexion, #La fuente del perfil de conexión de la base de datos
+    "who") #El nombre de la tabla para previsualizar
+```
+
+
+Las dos tablas contienen información diferente. La tabla **population** contiene la cantidad de personas en cada país durante los años 1995-2013, y la tabla **who** contiene la cantidad de casos nuevos de tuberculosis en cada país, año, grupo de edad y método de diagnóstico. Puede leer más sobre los significados de las columnas escribiendo **?who** en la consola.
+
+Lo que quiero hacer es fusionar y almacenar datos de ambas tablas en un nuevo objeto R. Los nuevos datos deben contener cuatro columnas:
+
+* país
+
+* año
+
+* casos nuevos en hombres de 35 a 44 años
+
+* la población total del país para ese año
+
+También quiero filtrar los datos según algunos criterios:
+
+* Solo casos en Brasil y Alemania
+
+* Solo casos entre 2000 y 2010
+
+¡Comencemos!
+
+
+## Método Clásico
+
+    SELECT 
+  who.country, who.year, who.new_sp_m3544, population.population
+    FROM 
+  who
+    LEFT JOIN
+  population ON population.country = who.country AND population.year = who.year
+    WHERE
+  who.country IN ('Brazil', 'Germany') AND
+  who.year >= 2000 AND
+  who.year <= 2010
+
+
+RStudio puede leer de forma nativa secuencias de comandos SQL cuando se encuentran en un fragmento de Markdown configurado como sql. output.var establece el nombre del marco de datos en el que se almacenarán los resultados, al que hemos llamado M1_results. El texto es la secuencia de comandos SQL necesaria para recuperar y filtrar los datos de ambas tablas de nuestra base de datos.
+
+Ahora puede trabajar con estos datos como lo haría con cualquier otro marco de datos. Echemos un vistazo a las primeras cinco filas:
+
+
+```{sql connection=conexion}
+SELECT 
+  who.country, who.year, who.new_sp_m3544, population.population
+FROM 
+  who
+LEFT JOIN
+  population ON population.country = who.country AND population.year = who.year
+WHERE
+  who.country IN ('Brazil', 'Germany') AND
+  who.year >= 2000 AND
+  who.year <= 2010
+```
+
+
+## Borrar todo esto
+
+
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
